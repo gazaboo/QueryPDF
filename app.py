@@ -12,9 +12,9 @@ from sentence_transformers.util import semantic_search
 def main():
     # load_dotenv()
     st.set_page_config(page_title='Chat with PDF', page_icon=':books:')
-    st.header('Archi PDFs')
+    st.header('Query PDFs')
 
-    user_question = st.text_input('As a question about you PDF')
+    user_question = st.text_input('What would you like to find in the PDFs ?')
 
     if user_question:
         if 'dataset_embeddings' in st.session_state:
@@ -76,7 +76,7 @@ def get_pdf_text(pdf_docs):
     for pdf in pdf_docs:
         pdf_reader = PdfReader(pdf)
         for page in pdf_reader.pages:
-            text += page.extractText().replace('\n', ' ')
+            text += page.extract_text().replace('\n', ' ')
     return text
 
 
