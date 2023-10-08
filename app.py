@@ -1,5 +1,5 @@
 import streamlit as st
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import requests
@@ -10,7 +10,7 @@ from sentence_transformers.util import semantic_search
 
 
 def main():
-    load_dotenv()
+    # load_dotenv()
     st.set_page_config(page_title='Chat with PDF', page_icon=':books:')
     st.header('Archi PDFs')
 
@@ -54,7 +54,7 @@ def handle_user_input(input):
 
 def query(texts):
     model_id = "sentence-transformers/all-MiniLM-L6-v2"
-    TOKEN = os.getenv('HUGGINGFACEHUB_API_TOKEN')
+    TOKEN = st.secrets['HUGGINGFACEHUB_API_TOKEN']
     api_url = f"https://api-inference.huggingface.co/pipeline/feature-extraction/{model_id}"
     headers = {"Authorization": f"Bearer {TOKEN}"}
     response = requests.post(api_url, headers=headers, json={
